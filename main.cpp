@@ -111,31 +111,50 @@ void task4(){
     delete[] arr;
 };
 
+using namespace std;
 void task5() {
-    vector<Vector<int>> threeSum(vector<int>& nums) {
-        int n=nums.size();
-        vector<vector<int>> ans;
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<n-2;i++){
-            if(i==0 || (i>0 && nums[i-1]!=nums[i])){
-                int newTarget=0-nums[i];
-                int left=i+1;
-                int right=n-1;
-                while(left<right){
-                    if(nums[left]+nums[right]==newTarget){
-                        int x=nums[left++];
-                        int y=nums[right--];
-                        ans.push_back({nums[i],x,y});
-                        while(left<right && nums[left]==x) left++;
-                        while(left<right && nums[right]==y) right--;
-                    }else if(nums[left]+nums[right] > newTarget)
-                        right--;
-                    else left++;
-                };
-            };
-        };
-        return ans;
-    };
+    int n;
+    std::vector<int> nums;
+    std::vector<std::vector<int>> ans;
+
+    std::cout << "Input size of array: ";
+    std::cin >> n;
+    nums.reserve(n);
+    for (int i = 0; i < n; ++i) { std::cin >> nums[i]; }
+
+    std::sort(nums.begin(),nums.end());
+
+    for(int i=0;i<n-2;i++){
+
+        if(i==0 || (i>0 && nums[i-1]!=nums[i])){
+
+            int newTarget=0-nums[i];
+            int left=i+1;
+            int right=n-1;
+
+            while(left<right){
+
+                if(nums[left]+nums[right]==newTarget){
+
+                    int x=nums[left++];
+                    int y=nums[right--];
+                    ans.push_back({nums[i],x,y});
+
+                    while(left<right && nums[left]==x) left++;
+                    while(left<right && nums[right]==y) right--;
+                }
+                else if(nums[left]+nums[right] > newTarget)
+                    right--;
+                else left++;
+            }
+        }
+    }
+
+    for (auto & trio : ans) {
+        std::cout << trio[0] << ", " << trio[1] << ", " << trio[2] << std::endl;
+    }
+}
+
 
 
     int main() {
